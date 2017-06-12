@@ -2,6 +2,7 @@ package com.lhy.test.java8.chapter2;
 
 import com.lhy.test.java8.data.GreateList;
 import com.lhy.test.java8.data.User8;
+import com.lhy.test.java8.data.User9;
 
 import javax.swing.text.html.Option;
 import java.util.*;
@@ -140,8 +141,41 @@ public class Demo21 {
         map1.forEach((k,v)->{System.out.println(k+"-"+v.getName());});
     }
 
+    // 用User8的age属性分组 得到 List<User8> -- Map<String,List<User8>>
+    public   void groups(){
+        List<User8> user8s = new ArrayList<>();
+        user8s.add(new User8("zhangsan","12"));
+        user8s.add(new User8("aaa","23"));
+        user8s.add(new User8("bbb","12"));
+
+        Map<String,List<User8>> map = user8s.stream().collect(Collectors.groupingBy(User8::getAge));
+        //map.forEach((k,v)->{System.out.println(k+"-"+v.size());});
+
+        Map<Boolean,List<User8>> map1 = user8s.stream().collect(Collectors.groupingBy(u->Integer.parseInt(u.getAge())>20));
+        //map1.forEach((k,v)->{System.out.println(k+"-"+v.size());});
+        //不返回list返回set
+        Map<String,Set<User8>> map2 = user8s.stream().collect(Collectors.groupingBy(User8::getAge,Collectors.toSet()));
+        //返回集合个数
+        Map<String,Long> map3 = user8s.stream().collect(Collectors.groupingBy(User8::getAge,Collectors.counting()));
+
+        List<User9> user9s = new ArrayList<>();
+        user9s.add(new User9("zhangsan",12));
+        user9s.add(new User9("aaa",23));
+        user9s.add(new User9("aaa",43));
+
+        Map<String,Set<User9>> ma4 = user9s.stream().collect(Collectors.groupingBy(User9::getName,Collectors.toSet()));
+        //ma4.forEach((k,v)->{System.out.println(k+"-"+v);});
+
+        Map<String,IntSummaryStatistics> ma5 = user9s.stream().collect(Collectors.groupingBy(User9::getName,Collectors.summarizingInt(User9::getAge)));
+        //用name分组，并且每个组只保留年龄最大的。 minBy最小的
+        Map<String,Optional<User9>> ma6 =   user9s.stream().collect(Collectors.groupingBy(User9::getName, Collectors.maxBy(Comparator.comparing(User9::getAge))));
+
+System.out.println();
+       // Map<String,Optional<User9>> ma6 =   user9s.stream().collect(Collectors.groupingBy(User9::getName, Collectors.maxBy(Comparator.comparing(User9::getAge))));
+    }
+
     public static void main(String a[]){
         Demo21 demo21 = new Demo21();
-        demo21.maps();
+        demo21.groups();
     }
 }
