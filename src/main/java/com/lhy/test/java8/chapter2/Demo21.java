@@ -5,6 +5,7 @@ import com.lhy.test.java8.data.User8;
 
 import javax.swing.text.html.Option;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Demo21 {
@@ -109,8 +110,38 @@ public class Demo21 {
         System.out.println(result);
     }
 
+    /**
+     * 流的结果聚合为 总和，最大，最小，平均值
+     */
+    public void sumavg(){
+        List<Integer> list = Arrays.asList(1,3,5,7,8,9);
+        IntSummaryStatistics summary = list.stream().collect(Collectors.summarizingInt(v->v));
+        double i = summary.getMax();
+        double j = summary.getMin();
+        double z = summary.getAverage();
+        double y = summary.getSum();
+        System.out.println(i+"-"+j+"-"+z+"-"+y);
+
+    }
+
+    /**
+     * 集合转成map
+     */
+    public void maps(){
+        List<User8> user8s = new ArrayList<>();
+        user8s.add(new User8("zhangsan","12"));
+        user8s.add(new User8("aaa","23"));
+        user8s.add(new User8("bbb","34"));
+        //  List<User8> ---- Map<String,String>
+        Map<String,String> map = user8s.stream().collect(Collectors.toMap(User8::getName,User8::getAge));
+        map.forEach((k,v)->{System.out.println(k+"-"+v);});
+        //  List<User8> ----  Map<String,User8>
+        Map<String,User8> map1 = user8s.stream().collect(Collectors.toMap(User8::getName, Function.identity()));
+        map1.forEach((k,v)->{System.out.println(k+"-"+v.getName());});
+    }
+
     public static void main(String a[]){
         Demo21 demo21 = new Demo21();
-        demo21.collectResult();
+        demo21.maps();
     }
 }
