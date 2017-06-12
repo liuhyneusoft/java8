@@ -5,6 +5,7 @@ import com.lhy.test.java8.data.User8;
 
 import javax.swing.text.html.Option;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Demo21 {
     /**
@@ -96,6 +97,16 @@ public class Demo21 {
         //收集到hashSet中
         HashSet<String> set = lists.stream().filter(x->x.length()>2).collect(HashSet::new,HashSet::add,HashSet::addAll);
         set.forEach(System.out::println);
+
+        //收集到list
+        List<String> list1 = lists.stream().filter(x->x.length()>2).collect(Collectors.toList());
+        //收集到set
+        Set<String> set1 = lists.stream().filter(x->x.length()>2).collect(Collectors.toSet());
+       //收集到到set的类型
+        TreeSet<String> set2 = lists.stream().filter(x->x.length()>2).collect(Collectors.toCollection(TreeSet::new));
+        //收集到一个String
+        String result = lists.stream().filter(x->x.length()>2).collect(Collectors.joining(","));
+        System.out.println(result);
     }
 
     public static void main(String a[]){
