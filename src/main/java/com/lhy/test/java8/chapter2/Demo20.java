@@ -76,6 +76,11 @@ public class Demo20 {
         //Stream<String> sort= list.stream().sorted(Comparator.comparing((String v)->v.length()).reversed());
         Stream<String> sort= list.stream().sorted(Comparator.comparing( String::length).reversed());
         sort.collect(Collectors.toList()).forEach(System.out::println);
+        //升序排序--按照对象的一个字段排序，排序的是string存的是数值。
+        // List<VAssignGrid> list = grid.stream().sorted(Comparator.comparing(v->Integer.parseInt(v.getBonusAmt()))).collect(Collectors.toList());
+        //倒序排序
+        // List<VAssignGrid> list1 = grid.stream().sorted(Comparator.comparing((VAssignGrid v)->Integer.parseInt(v.getBonusAmt())).reversed()).collect(Collectors.toList());
+    
     }
     /**
      * flatMap
