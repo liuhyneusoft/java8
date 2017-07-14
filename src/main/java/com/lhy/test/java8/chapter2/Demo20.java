@@ -103,8 +103,31 @@ public class Demo20 {
             // Student的id可以唯一确定一个Student
           Map<String, Student> studentMap = list.stream().collect(Collectors.toMap(Student::getId, Function.identity()));
           Map<String, String> studentMap1 = list.stream().collect(Collectors.toMap(Student::getId,Student::getName));
+        
+        List<Student> listValues = new ArrayList<Student>(studentMap.values()); //map values
+        List<String> listKeys = new ArrayList<String>(studentMap.keySet()); //map keys
     }
 
+    /**
+        list to set
+    */
+    public void list2set(){
+        Set<String> set = new HashSet<String>();
+        set.add("123");
+        set.add("456");
+        List<String> setToList = new ArrayList<String>(set); //Set To List
+
+        Set<String> listToSet = new HashSet<String>(setToList);
+    }
+    
+    /**
+        map to set
+    */
+    public void map2set(){
+        Set<String> mapToSetKeys = new HashSet<String>(studentMap.keySet()); //map keys
+        Set<Student> mapToSetValues = new HashSet<Student>(studentMap.values()); //map values
+
+    }
 
     public static void main(String arg[]){
         Demo20 d=new Demo20();
