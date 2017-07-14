@@ -96,7 +96,14 @@ public class Demo20 {
         ls.stream().forEach((Stream<String> v)->{List<String> lis = v.collect(Collectors.toList());lis.forEach(System.out::println);});
         l.stream().forEach(System.err::println);
     }
-
+/**
+* list to map
+*/
+    public void list2map(){
+            // Student的id可以唯一确定一个Student
+          Map<String, Student> studentMap = list.stream().collect(Collectors.toMap(Student::getId, Function.identity()));
+          Map<String, String> studentMap1 = list.stream().collect(Collectors.toMap(Student::getId,Student::getName));
+    }
 
 
     public static void main(String arg[]){
