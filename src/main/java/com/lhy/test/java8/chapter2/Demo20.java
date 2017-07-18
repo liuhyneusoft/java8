@@ -1,11 +1,16 @@
 package com.lhy.test.java8.chapter2;
 
 import com.lhy.test.java8.data.GreateList;
+import com.lhy.test.java8.data.Student;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -100,7 +105,8 @@ public class Demo20 {
 * list to map
 */
     public void list2map(){
-            // Student的id可以唯一确定一个Student
+    	 List<Student> list = new ArrayList<>();
+         // Student的id可以唯一确定一个Student
           Map<String, Student> studentMap = list.stream().collect(Collectors.toMap(Student::getId, Function.identity()));
           Map<String, String> studentMap1 = list.stream().collect(Collectors.toMap(Student::getId,Student::getName));
         
@@ -123,7 +129,11 @@ public class Demo20 {
     /**
         map to set
     */
+    
     public void map2set(){
+    	 List<Student> list = new ArrayList<>();
+         // Student的id可以唯一确定一个Student
+          Map<String, Student> studentMap = list.stream().collect(Collectors.toMap(Student::getId, Function.identity()));
         Set<String> mapToSetKeys = new HashSet<String>(studentMap.keySet()); //map keys
         Set<Student> mapToSetValues = new HashSet<Student>(studentMap.values()); //map values
 
