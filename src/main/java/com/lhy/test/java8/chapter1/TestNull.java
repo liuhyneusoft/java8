@@ -8,7 +8,7 @@ public class TestNull {
         InTest d = new InTest() {
             @Override
             public String getx() {
-                return "aaaaaaaaaaa";
+                return null;
             }
         };
         System.out.println(d.getx()); // null
